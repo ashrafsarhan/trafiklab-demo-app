@@ -30,6 +30,7 @@ public class RestClient<T> {
             // create headers
             HttpHeaders headers = new HttpHeaders();
             // set `accept` header
+            headers.add(HttpHeaders.ACCEPT_ENCODING, "gzip, deflate");
             headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
             // build the request
             HttpEntity<String> entity = new HttpEntity<>("", headers);
