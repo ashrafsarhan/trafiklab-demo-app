@@ -20,4 +20,12 @@ public class Config {
         return new RestTemplate();
     }
 
+    @Bean
+    public OpenAPI openAPI() {
+        return new OpenAPI()
+                .info(new Info().title("Trafiklab Demo API")
+                        .description("Trafiklab Demo API")
+                        .version("1.0"));
+    }
+
 }
