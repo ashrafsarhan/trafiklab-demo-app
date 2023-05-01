@@ -24,7 +24,7 @@ public class SlControllerTest {
     @Test
     public void testGetTopListOfBusLinesWithMostStopsSuccess() throws Exception {
         this.mockMvc.perform(get("/SL/TopListOfBusLinesWithMostStops/10"))
-                .andDo(print()).andExpect(status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].lineNumber", is("636")))
                 .andExpect(jsonPath("$[1].lineNumber", is("626")));
     }
