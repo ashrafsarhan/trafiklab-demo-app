@@ -42,6 +42,7 @@ public class StopsLinesService implements SlService {
                 .parallelStream()
                 .sorted(Comparator.comparing(l -> l.getValue().size(), Comparator.reverseOrder()))
                 .limit(listSize)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> a, LinkedHashMap::new));
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 }
