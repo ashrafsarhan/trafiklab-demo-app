@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @ComponentScan
 @EnableRetry
+@EnableCaching
 public class Config {
 
     @Bean
