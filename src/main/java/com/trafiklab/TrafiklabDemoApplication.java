@@ -16,18 +16,18 @@ import java.net.UnknownHostException;
 @Slf4j
 public class TrafiklabDemoApplication {
 
-	public static void main(String[] args) throws UnknownHostException {
-		SpringApplication app = new SpringApplication(TrafiklabDemoApplication.class);
-		app.setBannerMode(Banner.Mode.OFF);
-		ApplicationContext ctx = app.run(args);
-		Environment env = ctx.getEnvironment();
-		log.info("{} URL:\n----------------------------------------------------------\n\t" +
-						"\thttp://{}:{}{}\n----------------------------------------------------------",
-				env.getProperty("spring.application.name"),
-				InetAddress.getLocalHost().getHostAddress(),
-				env.getProperty("server.port"),
-				env.getProperty("springdoc.swagger-ui.path"));
+    public static void main(String[] args) throws UnknownHostException {
+        SpringApplication app = new SpringApplication(TrafiklabDemoApplication.class);
+        app.setBannerMode(Banner.Mode.OFF);
+        ApplicationContext ctx = app.run(args);
+        Environment env = ctx.getEnvironment();
+        log.info("{} URL:\n----------------------------------------------------------\n\t" +
+                        "\thttp://{}:{}{}\n----------------------------------------------------------",
+                env.getProperty("spring.application.name"),
+                InetAddress.getLocalHost().getHostAddress(),
+                env.getProperty("server.port"),
+                env.getProperty("springdoc.swagger-ui.path"));
 
-	}
+    }
 
 }

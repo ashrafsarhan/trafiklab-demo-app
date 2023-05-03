@@ -43,7 +43,7 @@ public class RestClient<T> {
             if (response.getStatusCode() == HttpStatus.OK) {
                 return Optional.ofNullable(response.getBody());
             } else {
-                throw new Exception(String.format("Api call executed with an error: {}, caused by: %s",response.getStatusCode(), response.getBody()));
+                throw new Exception(String.format("Api call executed with an error: {}, caused by: %s", response.getStatusCode(), response.getBody()));
             }
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             throw new Exception(String.format("Api call can not be executed, caused by: %s", e.getCause()));

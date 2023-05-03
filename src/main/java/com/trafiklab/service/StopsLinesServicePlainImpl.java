@@ -29,9 +29,9 @@ public class StopsLinesServicePlainImpl implements SlService<List<BusLine>> {
     public List<BusLine> getTopListOfBusLinesWithMostStops(int listSize, SortOrder sortOrder) {
         List<BusLine> busLineTopList = new ArrayList<>();
         Optional<LineDataResponse> lineDataResponse = StopsLinesRepository.getBusJourneyPatternPointOnLine();
-        if(lineDataResponse.isPresent()) {
+        if (lineDataResponse.isPresent()) {
             Map<String, List<JourneyPatternPointOnLine>> journeyPatternPointOnLineMap = new HashMap<>();
-            for (JourneyPatternPointOnLine e: lineDataResponse.get().getResponseData().result) {
+            for (JourneyPatternPointOnLine e : lineDataResponse.get().getResponseData().result) {
                 if (journeyPatternPointOnLineMap.containsKey(e.lineNumber))
                     journeyPatternPointOnLineMap.get(e.lineNumber).add(e);
                 else
@@ -41,9 +41,9 @@ public class StopsLinesServicePlainImpl implements SlService<List<BusLine>> {
             List<Map.Entry<String, List<JourneyPatternPointOnLine>>> journeyPatternPointOnLineMapTopEntries = mapUtil.getTopEntryWithValueSize(journeyPatternPointOnLineMap, sortOrder, listSize);
             for (Map.Entry<String, List<JourneyPatternPointOnLine>> e : journeyPatternPointOnLineMapTopEntries) {
                 BusLine busLine = BusLine.builder().lineNumber(e.getKey()).stopsCount(e.getValue().size()).lineStops(new ArrayList<>()).build();
-                  for (JourneyPatternPointOnLine journeyPatternPointOnLine : e.getValue()) {
-                      busLine.getLineStops().add(journeyPatternPointOnLine.journeyPatternPointNumber);
-                  }
+                for (JourneyPatternPointOnLine journeyPatternPointOnLine : e.getValue()) {
+                    busLine.getLineStops().add(journeyPatternPointOnLine.journeyPatternPointNumber);
+                }
                 busLineTopList.add(busLine);
             }
         } else

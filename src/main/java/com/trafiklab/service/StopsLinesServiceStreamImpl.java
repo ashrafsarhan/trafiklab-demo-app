@@ -27,13 +27,13 @@ public class StopsLinesServiceStreamImpl implements SlService<List<BusLine>> {
     @Cacheable(value = "TopListOfBusLinesWithMostStops")
     public List<BusLine> getTopListOfBusLinesWithMostStops(int listSize, SortOrder sortOrder) {
         Optional<LineDataResponse> lineDataResponse = StopsLinesRepository.getBusJourneyPatternPointOnLine();
-        if(lineDataResponse.isPresent())
+        if (lineDataResponse.isPresent())
             return lineDataResponse.get().responseData.getResult()
                     .stream().collect(Collectors.groupingBy(JourneyPatternPointOnLine::getLineNumber))
                     .entrySet()
                     .parallelStream()
-                    .sorted((SortOrder.DESC.equals(sortOrder))?
-                            (e1, e2) -> e2.getValue().size() - e1.getValue().size():
+                    .sorted((SortOrder.DESC.equals(sortOrder)) ?
+                            (e1, e2) -> e2.getValue().size() - e1.getValue().size() :
                             Comparator.comparingInt(e -> e.getValue().size()))
                     .collect(Collectors.toMap(
                             Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new))

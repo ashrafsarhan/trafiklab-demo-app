@@ -29,9 +29,9 @@ public class StopsLinesRepository implements SlRepository<LineDataResponse> {
     @Cacheable(value = "BusJourneyPatternPointOnLine")
     public Optional<LineDataResponse> getBusJourneyPatternPointOnLine() {
         Optional<LineDataResponse> lineDataResponse = restClient
-                .executeGetApiCallRetryable(String.format("%s?key=%s&model=jour&DefaultTransportModeCode=BUS", lineDataApiUrl,lineDataApiKey),
+                .executeGetApiCallRetryable(String.format("%s?key=%s&model=jour&DefaultTransportModeCode=BUS", lineDataApiUrl, lineDataApiKey),
                         LineDataResponse.class);
-        if(lineDataResponse.isPresent() && lineDataResponse.get().statusCode == 0)
+        if (lineDataResponse.isPresent() && lineDataResponse.get().statusCode == 0)
             return lineDataResponse;
         return Optional.empty();
     }
