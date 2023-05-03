@@ -39,6 +39,9 @@ docker run -p 8080:8080 trafiklab-demo-app
 
 
 ### Reference Documentation
+Trafiklab API
+* [SL Stops and lines v2.0 (Hållplatser och linjer 2)](https://www.trafiklab.se/api/trafiklab-apis/sl/stops-and-lines-2)
+
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
