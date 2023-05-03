@@ -3,25 +3,23 @@ package com.trafiklab.utils;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Component
 public class MapUtil<K,V> {
 
-    public Map<K, List<V>> sortMapBasedOnListValueSize(Map<K, List<V>> unSortedMap) {
-        return unSortedMap.entrySet()
-                .parallelStream()
-                .sorted(Comparator.comparing(l -> l.getValue().size(), Comparator.reverseOrder()))
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-    }
-
-    public Map<K, List<V>> getFirstEntries(Map<K, List<V>> sortedMap, int elementsToReturn) {
-        return sortedMap.entrySet()
-                .stream()
-                .limit(elementsToReturn)
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+    public List<Map.Entry<K, List<V>>> getTopEntryWithValueSize(Map<K, List<V>> map, SortOrder sortOrder, int n) {
+        // Create a list from elements of HashMap
+        List<Map.Entry<K, List<V>>> list =
+                new LinkedList<>(map.entrySet());
+        // Create a comparator based on the given sort order
+        Comparator<Map.Entry<K, List<V>>> comparator = Comparator.comparingInt(e -> e.getValue().size());//ASC
+        switch (sortOrder){
+            case DESC ->  comparator = (e1, e2) -> e2.getValue().size() - e1.getValue().size();
+        }
+        // Sort the list
+        Collections.sort(list, comparator);
+        // Get a sub list based on the given n number of elements 
+        return list.subList(0,n);
     }
 
 }
