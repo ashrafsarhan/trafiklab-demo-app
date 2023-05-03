@@ -1,6 +1,7 @@
 package com.trafiklab;
 
 import com.trafiklab.utils.MapUtil;
+import com.trafiklab.utils.SortOrder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +29,11 @@ class MapUtilTest {
 	}
 
 	@Test
-	void testSortMapBasedOnListValueSizeSuccess() {
-		Assertions.assertNotNull(mapUtil.sortMapBasedOnListValueSize(TEST_MAP), "Test SortMapBasedOnListValueSizeSuccess Fail");
-		Assertions.assertEquals(5, mapUtil.sortMapBasedOnListValueSize(TEST_MAP).size(), "Test SortMapBasedOnListValueSizeSuccess Fail");
-		Assertions.assertEquals("500", mapUtil.sortMapBasedOnListValueSize(TEST_MAP).entrySet().stream().findFirst().get().getKey(), "Test SortMapBasedOnListValueSizeSuccess Fail");
-	}
-
-	@Test
 	void testGetFirstEntriesSuccess() {
-		Assertions.assertNotNull(mapUtil.getFirstEntries(mapUtil.sortMapBasedOnListValueSize(TEST_MAP), 2), "Test GetFirstEntriesSuccess Fail");
-		Assertions.assertEquals(2, mapUtil.getFirstEntries(mapUtil.sortMapBasedOnListValueSize(TEST_MAP),2).size(), "Test GetFirstEntriesSuccess Fail");
-		Assertions.assertEquals("500", mapUtil.sortMapBasedOnListValueSize(TEST_MAP).entrySet().stream().findFirst().get().getKey(), "Test GetFirstEntriesSuccess Fail");
-		Assertions.assertEquals("400", mapUtil.getFirstEntries(mapUtil.sortMapBasedOnListValueSize(TEST_MAP),2).entrySet().stream().reduce((e1,e2) -> e2).get().getKey(), "Test GetFirstEntriesSuccess Fail");
+		Assertions.assertNotNull(mapUtil.getTopEntryWithValueSize(TEST_MAP, SortOrder.ASC, 2), "Test GetFirstEntriesSuccess Fail");
+		Assertions.assertEquals(2, mapUtil.getTopEntryWithValueSize(TEST_MAP, SortOrder.ASC, 2).size(), "Test GetFirstEntriesSuccess Fail");
+		Assertions.assertEquals("500", mapUtil.getTopEntryWithValueSize(TEST_MAP, SortOrder.DESC, 2).get(0).getKey(), "Test GetFirstEntriesSuccess Fail");
+		Assertions.assertEquals("400", mapUtil.getTopEntryWithValueSize(TEST_MAP, SortOrder.DESC, 2).get(1).getKey(), "Test GetFirstEntriesSuccess Fail");
 	}
 
 }
