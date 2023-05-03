@@ -38,7 +38,7 @@ public class StopsLinesServicePlainImpl implements SlService<List<BusLine>> {
                     journeyPatternPointOnLineMap.put(e.lineNumber, new ArrayList<>(Arrays.asList(e)));
 
             }
-            List<Map.Entry<String, List<JourneyPatternPointOnLine>>> journeyPatternPointOnLineMapTopEntries = mapUtil.getTopEntryWithValueSize(journeyPatternPointOnLineMap, sortOrder, 10);
+            List<Map.Entry<String, List<JourneyPatternPointOnLine>>> journeyPatternPointOnLineMapTopEntries = mapUtil.getTopEntryWithValueSize(journeyPatternPointOnLineMap, sortOrder, listSize);
             for (Map.Entry<String, List<JourneyPatternPointOnLine>> e : journeyPatternPointOnLineMapTopEntries) {
                 BusLine busLine = BusLine.builder().lineNumber(e.getKey()).stopsCount(e.getValue().size()).lineStops(new ArrayList<>()).build();
                   for (JourneyPatternPointOnLine journeyPatternPointOnLine : e.getValue()) {
