@@ -1,7 +1,8 @@
 package com.trafiklab;
 
 import com.trafiklab.api.SlService;
-import com.trafiklab.dto.JourneyPatternPointOnLine;
+import com.trafiklab.dto.BusLine;
+import com.trafiklab.utils.SortOrder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +10,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
-import java.util.Map;
 
 @ActiveProfiles("test")
 @SpringBootTest
-public class StopsLinesServiceTest {
+public class StopsLinesServiceStreamImplTest {
 
     @Autowired
-    private SlService stopsLinesService;
+    private SlService<List<BusLine>> stopsLinesServiceStreamImpl;
 
     @Test
     void testGetTopListOfBusLinesWithMostStopsSuccess() {
-        Map<String, List<JourneyPatternPointOnLine>> topListOfBusLinesWithMostStops = stopsLinesService.getTopListOfBusLinesWithMostStops(10);
+        List<BusLine> topListOfBusLinesWithMostStops = stopsLinesServiceStreamImpl.getTopListOfBusLinesWithMostStops(10, SortOrder.DESC);
         Assertions.assertNotNull(topListOfBusLinesWithMostStops, "Test GetTopListOfBusLinesWithMostStops Fail");
         Assertions.assertEquals(10, topListOfBusLinesWithMostStops.size());
+        Assertions.assertEquals("636", topListOfBusLinesWithMostStops.get(0).getLineNumber());
+        Assertions.assertEquals(154, topListOfBusLinesWithMostStops.get(9).getStopsCount());
     }
 
 }
