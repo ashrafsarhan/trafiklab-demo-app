@@ -2,37 +2,34 @@ package com.trafiklab.rest;
 
 import com.trafiklab.api.SlService;
 import com.trafiklab.dto.BusLine;
-import com.trafiklab.dto.JourneyPatternPointOnLine;
+import com.trafiklab.utils.SortOrder;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/SL")
+@Tag(name = "Stops Lines")
 public class SlController {
 
-    private final SlService stopsLinesService;
+    private final SlService<List<BusLine>> stopsLinesServiceStreamImpl;
 
-    @GetMapping(value = "/TopListOfBusLinesWithMostStops/{listSize}")
-    public List<BusLine> getTopListOfBusLinesWithMostStops(@PathVariable Integer listSize) {
-        return stopsLinesService.getTopListOfBusLinesWithMostStops(listSize)
-                .entrySet()
-                .stream()
-                .map(entry -> {
-                    return BusLine.builder()
-                            .lineNumber(entry.getKey())
-                            .stopsCount(entry.getValue().size())
-                            .lineStops(entry.getValue()
-                                    .stream().map(JourneyPatternPointOnLine::getJourneyPatternPointNumber)
-                                    .collect(Collectors.toList()))
-                            .build();
-                }).collect(Collectors.toList());
+    private final SlService<List<BusLine>> stopsLinesServicePlainImpl;
+
+    @GetMapping(value = "/TopListOfBusLinesWithMostStops/StreamImpl")
+    public List<BusLine> getTopListOfBusLinesWithMostStopsByStreamImpl(@RequestParam(defaultValue = "10") Integer listSize, @RequestParam(defaultValue = "DESC") SortOrder sortOrder) {
+        return stopsLinesServiceStreamImpl.getTopListOfBusLinesWithMostStops(listSize, sortOrder);
+    }
+
+    @GetMapping(value = "/TopListOfBusLinesWithMostStops/PlainImpl")
+    public List<BusLine> getTopListOfBusLinesWithMostStopsByPlainImpl(@RequestParam(defaultValue = "10") Integer listSize, @RequestParam(defaultValue = "DESC") SortOrder sortOrder) {
+        return stopsLinesServicePlainImpl.getTopListOfBusLinesWithMostStops(listSize, sortOrder);
     }
 
 }
