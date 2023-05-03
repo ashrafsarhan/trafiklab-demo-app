@@ -1,4 +1,4 @@
-package com.trafiklab.dto;
+package com.trafiklab.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

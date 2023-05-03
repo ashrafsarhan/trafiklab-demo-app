@@ -1,6 +1,6 @@
 package com.trafiklab;
 
-import com.trafiklab.dto.LineDataResponse;
+import com.trafiklab.domain.LineDataResponse;
 import com.trafiklab.utils.RestClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
