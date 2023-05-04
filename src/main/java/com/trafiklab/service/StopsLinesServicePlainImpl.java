@@ -35,7 +35,7 @@ public class StopsLinesServicePlainImpl implements SlService<List<BusLine>> {
                 if (journeyPatternPointOnLineMap.containsKey(e.lineNumber))
                     journeyPatternPointOnLineMap.get(e.lineNumber).add(e);
                 else
-                    journeyPatternPointOnLineMap.put(e.lineNumber, new ArrayList<>(Arrays.asList(e)));
+                    journeyPatternPointOnLineMap.put(e.lineNumber, new ArrayList<>(List.of(e)));
 
             }
             List<Map.Entry<String, List<JourneyPatternPointOnLine>>> journeyPatternPointOnLineMapTopEntries = mapUtil.getTopEntryWithValueSize(journeyPatternPointOnLineMap, sortOrder, listSize);
@@ -46,8 +46,7 @@ public class StopsLinesServicePlainImpl implements SlService<List<BusLine>> {
                 }
                 busLineTopList.add(busLine);
             }
-        } else
-            log.warn("Api call response with status code:{} does not have the expected data: {}", lineDataResponse.get().statusCode, lineDataResponse);
+        } 
         return busLineTopList;
     }
 }
