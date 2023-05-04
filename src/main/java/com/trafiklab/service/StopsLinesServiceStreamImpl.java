@@ -20,13 +20,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class StopsLinesServiceStreamImpl implements SlService<List<BusLine>> {
 
-    private final SlRepository<LineDataResponse> StopsLinesRepository;
+    private final SlRepository<LineDataResponse> stopsLinesRepository;
 
     @SneakyThrows
     @Override
     @Cacheable(value = "TopListOfBusLinesWithMostStops")
     public List<BusLine> getTopListOfBusLinesWithMostStops(int listSize, SortOrder sortOrder) {
-        Optional<LineDataResponse> lineDataResponse = StopsLinesRepository.getBusJourneyPatternPointOnLine();
+        Optional<LineDataResponse> lineDataResponse = stopsLinesRepository.getBusJourneyPatternPointOnLine();
         if (lineDataResponse.isPresent())
             return lineDataResponse.get().responseData.getResult()
                     .stream().collect(Collectors.groupingBy(JourneyPatternPointOnLine::getLineNumber))

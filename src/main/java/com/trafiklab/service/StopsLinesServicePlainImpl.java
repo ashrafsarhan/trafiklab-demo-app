@@ -19,7 +19,7 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class StopsLinesServicePlainImpl implements SlService<List<BusLine>> {
-    private final SlRepository<LineDataResponse> StopsLinesRepository;
+    private final SlRepository<LineDataResponse> stopsLinesRepository;
 
     private final MapUtil<String, JourneyPatternPointOnLine> mapUtil;
 
@@ -28,7 +28,7 @@ public class StopsLinesServicePlainImpl implements SlService<List<BusLine>> {
     @Cacheable(value = "TopListOfBusLinesWithMostStops")
     public List<BusLine> getTopListOfBusLinesWithMostStops(int listSize, SortOrder sortOrder) {
         List<BusLine> busLineTopList = new ArrayList<>();
-        Optional<LineDataResponse> lineDataResponse = StopsLinesRepository.getBusJourneyPatternPointOnLine();
+        Optional<LineDataResponse> lineDataResponse = stopsLinesRepository.getBusJourneyPatternPointOnLine();
         if (lineDataResponse.isPresent()) {
             Map<String, List<JourneyPatternPointOnLine>> journeyPatternPointOnLineMap = new HashMap<>();
             for (JourneyPatternPointOnLine e : lineDataResponse.get().getResponseData().result) {
