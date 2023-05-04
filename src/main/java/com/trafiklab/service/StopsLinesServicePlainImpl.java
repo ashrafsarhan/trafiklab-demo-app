@@ -46,7 +46,7 @@ public class StopsLinesServicePlainImpl implements SlService<List<BusLine>> {
                 }
                 busLineTopList.add(busLine);
             }
-        } 
+        }
         return busLineTopList;
     }
 }

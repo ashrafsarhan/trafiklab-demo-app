@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
@@ -39,7 +38,9 @@ class RestClientTest {
     @BeforeEach
     public void setUp() {
         Mockito.when(restTemplate.exchange(eq(String.format("%s?key=%s&model=jour&DefaultTransportModeCode=BUS", lineDataApiUrl, lineDataApiKey)), eq(HttpMethod.GET), any(), eq(LineDataResponse.class))).thenReturn(TestHelper.LINE_DATA_RESPONSE_ENTITY);
-        Mockito.when(restTemplate.exchange(eq(TestHelper.UNAVAILABLE_API_URL), eq(HttpMethod.GET), any(), eq(LineDataResponse.class))).thenAnswer(invocation -> { throw new Exception(); });
+        Mockito.when(restTemplate.exchange(eq(TestHelper.UNAVAILABLE_API_URL), eq(HttpMethod.GET), any(), eq(LineDataResponse.class))).thenAnswer(invocation -> {
+            throw new Exception();
+        });
     }
 
     @Test

@@ -11,7 +11,7 @@ import java.util.*;
 
 public class TestHelper {
 
-    static final Map<String, List<String>> TEST_MAP  = new HashMap<>() {{
+    static final Map<String, List<String>> TEST_MAP = new HashMap<>() {{
         put("100", Arrays.asList("0001"));
         put("200", Arrays.asList("0001", "0002"));
         put("300", Arrays.asList("0001", "0002", "0003"));

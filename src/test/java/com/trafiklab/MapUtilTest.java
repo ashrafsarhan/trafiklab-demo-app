@@ -1,18 +1,11 @@
 package com.trafiklab;
 
 import com.trafiklab.utils.MapUtil;
-import com.trafiklab.utils.SortOrder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 
 
 @ActiveProfiles("test")

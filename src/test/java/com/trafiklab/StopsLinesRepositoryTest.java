@@ -1,6 +1,5 @@
 package com.trafiklab;
 
-import com.trafiklab.api.SlRepository;
 import com.trafiklab.domain.LineDataResponse;
 import com.trafiklab.repository.StopsLinesRepository;
 import com.trafiklab.utils.RestClient;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -32,7 +30,9 @@ public class StopsLinesRepositoryTest {
     @BeforeEach
     public void setUp() {
         Mockito.when(restClient.executeGetApiCallRetryable(any(String.class), eq(LineDataResponse.class))).thenReturn(TestHelper.LINE_DATA_RESPONSE);
-        Mockito.when(restClient.executeGetApiCallRetryable(eq(TestHelper.UNAVAILABLE_API_URL), eq(LineDataResponse.class))).thenAnswer(invocation -> { throw new Exception(); });
+        Mockito.when(restClient.executeGetApiCallRetryable(eq(TestHelper.UNAVAILABLE_API_URL), eq(LineDataResponse.class))).thenAnswer(invocation -> {
+            throw new Exception();
+        });
     }
 
     @Test
